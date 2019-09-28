@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Designer : MonoBehaviour {
 
+	// Created: September 24th 2019 - Thomas Carrella
+
 	public Transform directionals;
 
 	// References
