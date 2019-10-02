@@ -78,5 +78,4 @@ public class Designer : MonoBehaviour {
 		directionals.transform.position = camera.transform.position + ((camera.transform.right * -1.6f) + (camera.transform.forward * 11.5f) + (camera.transform.up * -0.9f));
 	}
 	#endregion
-
 	}

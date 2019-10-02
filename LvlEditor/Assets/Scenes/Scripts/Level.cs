@@ -30,11 +30,40 @@ public class Level : MonoBehaviour {
 		}
 
 		blocks[15, 15, 15] = 0;
+		blocks[15, 15, 16] = 0;
 		blocks[15, 16, 15] = 0;
 		blocks[15, 16, 16] = 0;
-		blocks[15, 15, 16] = 0;
+		blocks[16, 15, 15] = 0;
+		blocks[16, 15, 16] = 0;
+		blocks[16, 16, 15] = 0;
 		blocks[16, 16, 16] = 0;
+		blocks[15, 15, 17] = 0;
+		blocks[15, 17, 15] = 0;
+		blocks[15, 17, 17] = 0;
+		blocks[17, 15, 15] = 0;
+		blocks[17, 15, 17] = 0;
+		blocks[17, 17, 15] = 0;
+		blocks[17, 17, 17] = 0;
+		blocks[16, 16, 17] = 0;
+		blocks[16, 17, 16] = 0;
+		blocks[16, 17, 17] = 0;
+		blocks[17, 16, 16] = 0;
+		blocks[17, 16, 17] = 0;
+		blocks[17, 17, 16] = 0;
+		blocks[17, 17, 17] = 0;
+
 		blocks[15, 16, 17] = 0;
+		blocks[16, 15, 17] = 0;
+		blocks[17, 16, 15] = 0;
+		blocks[15, 17, 16] = 0;
+		blocks[16, 17, 15] = 0;
+		blocks[17, 15, 16] = 0;
+
+		blocks[15, 15, 18] = 0;
+		blocks[15, 16, 18] = 0;
+		blocks[15, 17, 18] = 0;
+		blocks[14, 15, 15] = 0;
+		blocks[14, 15, 16] = 0;
 
 		GenerateMesh();
 	}
