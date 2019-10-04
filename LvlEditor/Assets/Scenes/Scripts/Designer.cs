@@ -10,6 +10,7 @@ public class Designer : MonoBehaviour {
 
 	// References
 	Camera camera;
+	Camera raycastCamera;
 
 	// Variables
 	Quaternion rotation = Quaternion.identity;
@@ -18,21 +19,21 @@ public class Designer : MonoBehaviour {
 	Vector3 position;
 
 	// Camera
-	float zoomCurrent;
-	float zoomMin = 10f;
-	float zoomMax = 200f;
-	float zoomIncrement = 10f;
+	float zoomCurrent = 5;
+	float zoomMin = 1f;
+	float zoomMax = 10f;
+	float zoomIncrement = 0.5f;
 
 	#region // Initial Methods
 	private void Start () {
 		FetchReferences();
 
-		rotation = camera.transform.rotation;
-		zoomCurrent = 50f;
+		rotation = transform.rotation;
 	}
 	private void FetchReferences () {
 		// Fetches all references necessary for this script to function
 		camera = transform.Find("[Camera]").GetComponent<Camera>();
+		raycastCamera = camera.transform.Find("[RaycastCamera]").GetComponent<Camera>();
 	}
 	#endregion
 
@@ -54,7 +55,7 @@ public class Designer : MonoBehaviour {
 		if (Input.GetMouseButton(2)) {
 			if (Input.GetKey(KeyCode.LeftShift)) {
 				// Movement
-				position += ((camera.transform.right * -Input.GetAxis("Mouse X")) + (camera.transform.up * -Input.GetAxis("Mouse Y"))) * (0.1f + (Mathf.InverseLerp(zoomMin, zoomMax, zoomCurrent) * 1f));
+				position += ((camera.transform.right * -Input.GetAxis("Mouse X")) + (camera.transform.up * -Input.GetAxis("Mouse Y"))) * (zoomCurrent * 0.05f);
 			} else {
 				// Rotation
 				rotation = Quaternion.AngleAxis(Input.GetAxis("Mouse X"), Vector3.up) * Quaternion.AngleAxis(-Input.GetAxis("Mouse Y"), camera.transform.right) * rotation;
@@ -71,11 +72,16 @@ public class Designer : MonoBehaviour {
 		rotation = Quaternion.AngleAxis(angularVelocity.x, Vector3.up) * Quaternion.AngleAxis(angularVelocity.y, camera.transform.right) * rotation;
 
 		// Set Camera
-		camera.transform.position = (rotation * new Vector3(0, 0, -zoomCurrent)) + position;
-		camera.transform.rotation = rotation;
+		transform.position = position;
+		transform.rotation = rotation;
+		camera.orthographicSize = zoomCurrent;
+		raycastCamera.orthographicSize = zoomCurrent;
 	}
 	private void UpdateOther () {
-		directionals.transform.position = camera.transform.position + ((camera.transform.right * -1.6f) + (camera.transform.forward * 11.5f) + (camera.transform.up * -0.9f));
+		directionals.transform.position = camera.transform.position + ((camera.transform.right * -1.5f * camera.orthographicSize) + (camera.transform.forward * 5) + (camera.transform.up * -0.8f * camera.orthographicSize));
+
+		directionals.transform.rotation = Quaternion.identity;
+		directionals.transform.localScale = Vector3.one * 0.01f * camera.orthographicSize;
 	}
 	#endregion
 	}

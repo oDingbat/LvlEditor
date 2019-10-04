@@ -15,7 +15,7 @@ public class Level : MonoBehaviour {
 	public int[,,] blocks;
 	public bool meshUpdatePending;
 
-	private void Start () {
+	private void Start() {
 		meshFilter = gameObject.GetComponent<MeshFilter>();
 		meshCollider = gameObject.GetComponent<MeshCollider>();
 
@@ -64,6 +64,7 @@ public class Level : MonoBehaviour {
 		blocks[15, 17, 18] = 0;
 		blocks[14, 15, 15] = 0;
 		blocks[14, 15, 16] = 0;
+		
 
 		GenerateMesh();
 	}
@@ -74,9 +75,6 @@ public class Level : MonoBehaviour {
 		int width = blocks.GetLength(0);
 		int height = blocks.GetLength(1);
 		int depth = blocks.GetLength(2);
-
-		Vector3 midpoint = new Vector3(width / 2, height / 2, depth / 2);
-		Vector3 vertexOffset = midpoint * -1f;
 
 		// Create Mesh Pieces
 		Mesh newMesh = new Mesh();
@@ -92,10 +90,10 @@ public class Level : MonoBehaviour {
 													// Top Face
 
 						if (y < height - 1 && blocks[x, y + 1, z] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -103,7 +101,7 @@ public class Level : MonoBehaviour {
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 2);
 							triangles.Add(vertCount + 3);
-							
+
 							uvs.Add(new Vector2(0, 0));
 							uvs.Add(new Vector2(1, 0));
 							uvs.Add(new Vector2(1, 1));
@@ -114,10 +112,10 @@ public class Level : MonoBehaviour {
 
 						// Bottom Face
 						if (y > 0 && blocks[x, y - 1, z] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -136,10 +134,10 @@ public class Level : MonoBehaviour {
 
 						// Left Face
 						if (x > 0 && blocks[x - 1, y, z] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -158,10 +156,10 @@ public class Level : MonoBehaviour {
 
 						// Right Face
 						if (x < width - 1 && blocks[x + 1, y, z] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -180,10 +178,10 @@ public class Level : MonoBehaviour {
 
 						// Front Face
 						if (z > 0 && blocks[x, y, z - 1] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -202,10 +200,10 @@ public class Level : MonoBehaviour {
 
 						// Back Face
 						if (z < depth - 1 && blocks[x, y, z + 1] == 0) {
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
-							vertices.Add(vertexOffset + new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
+							vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
 
 							triangles.Add(vertCount + 0);
 							triangles.Add(vertCount + 1);
@@ -237,6 +235,64 @@ public class Level : MonoBehaviour {
 
 		meshFilter.sharedMesh = newMesh;
 		meshCollider.sharedMesh = newMesh;
+	}
+
+	public void ManipulateBlocks(Vector3 blockZeroWorldPos, Vector3 manipulationField, Vector3 manipulationDirection) {
+		// Manipulates blocks starting at blockZeroWorldPos through the manipulationField as a for loop, in the direction of manipulationDirection normalized
+
+		// Get Block ZERO coordinates
+		BlockCoordinates blockZeroCoords = GetRelativeBlockCoordinates(blockZeroWorldPos);
+
+		// Set Array Sizes
+		int[,,] blocksManipulated = new int[Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x)];
+		int[,,] blocksPushed = new int[Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x)];
+		int[,,] blocksPulled = new int[Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x), Mathf.RoundToInt(manipulationField.x)];
+
+		// Get Pulled Blocks
+		int width = blocksManipulated.GetLength(0);
+		int height = blocksManipulated.GetLength(1);
+		int depth = blocksManipulated.GetLength(2);
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				for (int z = 0; z < depth; z++) {
+
+				}
+			}
+		}
+
+		manipulationDirection = manipulationDirection.normalized;   // Make sure this is normalized
+
+
+		GenerateMesh();
+	}
+
+	public void SetBlock (int blockID, Vector3 worldPosition) {
+		BlockCoordinates blockCoordinates = GetRelativeBlockCoordinates(worldPosition);
+
+		blocks[blockCoordinates.x, blockCoordinates.y, blockCoordinates.z] = blockID;
+
+		GenerateMesh();
+	}
+
+	public BlockCoordinates GetRelativeBlockCoordinates (Vector3 blockWorldPosition) {
+		Vector3 relativePosition = blockWorldPosition - transform.position;
+		return BlockCoordinates.Vector3ToBlockCoordinates(relativePosition);
+	}
+
+	public class BlockCoordinates {
+		public int x;
+		public int y;
+		public int z;
+
+		public BlockCoordinates (int _x, int _y, int _z) {
+			x = _x;
+			y = _y;
+			z = _z;
+		}
+
+		public static BlockCoordinates Vector3ToBlockCoordinates (Vector3 pos) {
+			return new BlockCoordinates(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+		}
 	}
 
 }

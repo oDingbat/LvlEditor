@@ -11,14 +11,14 @@ public class LineAutoResizer : MonoBehaviour {
 
 	LineRenderer lineRenderer;
 
-	float widthMultiplier = 0.001f;
+	float widthMultiplier = 0.0125f;
 
 	private void Start () {
 		lineRenderer = GetComponent<LineRenderer>();
 	}
 	
 	private void Update () {
-		lineRenderer.widthMultiplier = Vector3.Distance(transform.position, camera.transform.position) * widthMultiplier;
+		lineRenderer.widthMultiplier = camera.orthographicSize * widthMultiplier;
 	}
 
 
